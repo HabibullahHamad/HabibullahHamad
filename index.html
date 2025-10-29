@@ -208,13 +208,22 @@
       <nav class="nav">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
+        <a href="projects.html">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
+<style>
+    .hero {
+        background-image: url('path/to/your/background-image.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        color: white; /* Adjust text color for better visibility */
+    }
+</style>
     <div class="hero-content">
       <h2>Hello, I’m <span>Habibullah Hamad</span></h2>
       <p>Software Developer | Web Designer | System Analyst</p>
@@ -234,9 +243,30 @@
             animation: slideDown 1s ease-in-out forwards;
         }
     </style>
+    <style>
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(10px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+        }
+        .animated-image {
+            animation: slideDown 4s ease-in-out infinite;
+        }
+    </style>
+
     <img src="1.png" alt="Animated image of Habibullah Hamad" class="animated-image" style="position: absolute; right: 100px; top: 100px; width: 150px; height: auto; border-radius: 88px; box-shadow: 0 4px 12px rgba(212, 8, 8, 0.1);">
     </div>
   </section>
+
 
   <section id="about" class="about">
     <h2>About Me</h2>

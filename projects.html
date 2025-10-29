@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Projects — Embedded Viewer</title>
+
+    <!-- Optional: change font or remove if offline -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root{
+            --bg:#0f1724;
+            --card:#0b1220aa;
+            --glass: rgba(255,255,255,0.04);
+            --accent: #6ee7b7;
+            --muted: #9aa6b2;
+            --radius:14px;
+            --shadow: 0 8px 30px rgba(2,6,23,0.6);
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+            background:
+                radial-gradient(600px 300px at 10% 10%, rgba(110,231,183,0.07), transparent 10%),
+                radial-gradient(500px 200px at 90% 90%, rgba(99,102,241,0.04), transparent 10%),
+                var(--bg);
+            color:#e6eef6;
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            padding:28px;
+        }
+
+        .wrapper{
+            max-width:1200px;
+            margin:0 auto;
+            display:grid;
+            grid-template-columns: 320px 1fr;
+            gap:22px;
+            min-height:calc(100vh - 56px);
+        }
+
+        /* Sidebar */
+        .sidebar{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            padding:18px;
+            border-radius:var(--radius);
+            box-shadow:var(--shadow);
+            border:1px solid rgba(255,255,255,0.03);
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+        .sidebar h2{
+            margin:0 0 6px 0;
+            font-size:14px;
+            color:var(--accent);
+            letter-spacing:0.6px;
+        }
+        .sidebar p{margin:0;margin-bottom:6px;color:var(--muted);font-size:13px}
+
+        .list{
+            overflow:auto;
+            padding-right:6px;
+        }
+        .item{
+            display:flex;
+            gap:12px;
+            align-items:center;
+            padding:10px;
+            border-radius:10px;
+            margin-bottom:8px;
+            cursor:pointer;
+            transition:transform .12s ease, background .12s ease;
+            background:transparent;
+            border:1px solid transparent;
+        }
+        .item:hover{transform:translateY(-4px); background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-color:rgba(255,255,255,0.03)}
+        .item.active{background:linear-gradient(90deg, rgba(110,231,183,0.06), rgba(99,102,241,0.03)); border-color: rgba(110,231,183,0.12)}
+        .thumb{
+            width:58px;height:42px;border-radius:8px;flex:0 0 58px;overflow:hidden;background:linear-gradient(135deg,#0a2,#036);
+            display:flex;align-items:center;justify-content:center;font-weight:600;color:#08331f;font-size:13px;
+            box-shadow: 0 4px 18px rgba(2,6,23,0.45);
+        }
+        .meta{flex:1;min-width:0}
+        .meta .title{font-size:14px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .meta .desc{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+        .controls{
+            display:flex;
+            gap:8px;
+            margin-top:6px;
+            align-items:center;
+        }
+        .btn{
+            background:var(--glass);
+            border:1px solid rgba(255,255,255,0.03);
+            color:var(--accent);
+            padding:8px 12px;
+            border-radius:10px;
+            font-size:13px;
+            cursor:pointer;
+            transition:transform .12s ease, background .12s;
+        }
+        .btn.secondary{color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,0.02)}
+        .btn:active{transform:translateY(1px)}
+
+        /* Viewer */
+        .viewer{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            padding:12px;
+            border-radius:var(--radius);
+            box-shadow:var(--shadow);
+            border:1px solid rgba(255,255,255,0.03);
+            display:flex;
+            flex-direction:column;
+            min-height:420px;
+        }
+        .viewer .topbar{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:6px 6px 10px 6px;
+        }
+        .viewer .title{
+            font-weight:600;
+            font-size:15px;
+            color:#fff;
+            display:flex;
+            gap:8px;
+            align-items:center;
+            flex:1;
+        }
+        .viewer .title small{color:var(--muted); font-weight:400;font-size:12px}
+
+        .controls-right{display:flex;gap:8px}
+
+        .iframe-wrap{
+            position:relative;
+            flex:1;
+            margin-top:6px;
+            border-radius:12px;
+            overflow:hidden;
+            background:linear-gradient(180deg,rgba(12,16,22,0.6), rgba(8,12,18,0.6));
+            border:1px solid rgba(255,255,255,0.02);
+        }
+        iframe{
+            width:100%;
+            height:100%;
+            border:0;
+            display:block;
+        }
+
+        .loader{
+            position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(180deg, rgba(2,6,23,0.4), rgba(2,6,23,0.45));
+            z-index:6;backdrop-filter: blur(4px);
+            transition:opacity .18s ease;
+            gap:12px;
+            flex-direction:column;
+            color:var(--muted);
+            font-size:13px;
+        }
+        .loader.hidden{opacity:0;pointer-events:none;visibility:hidden}
+        .spinner{
+            width:44px;height:44px;border-radius:50%;
+            border:4px solid rgba(255,255,255,0.06);
+            border-top-color:var(--accent);
+            animation:spin 1s linear infinite;
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        .blocked{
+            padding:18px;text-align:center;color:var(--muted);
+            display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;
+            height:100%;
+        }
+
+        /* Responsive */
+        @media (max-width:880px){
+            .wrapper{grid-template-columns:1fr; padding-bottom:28px}
+            .sidebar{order:2}
+            .viewer{order:1}
+            .iframe-wrap{height:60vh}
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar" aria-label="Projects list">
+            <h2>Projects</h2>
+            <p>Select an entry to open it inside this page.</p>
+
+            <div class="list" id="list">
+                <!-- Items: edit urls/titles as needed -->
+                <div class="item active" data-url="about.html" data-title="About (local)">
+                    <div class="thumb" style="background:linear-gradient(135deg,#FFD966,#FF7A66)">AB</div>
+                    <div class="meta">
+                        <div class="title">About (local)</div>
+                        <div class="desc">Opens a local file like about.html</div>
+                    </div>
+                </div>
+
+                <div class="item" data-url="projects/project1.html" data-title="Project 1 (local)">
+                    <div class="thumb" style="background:linear-gradient(135deg,#93C5FD,#647DEE)">P1</div>
+                    <div class="meta">
+                        <div class="title">Project 1</div>
+                        <div class="desc">Example of a project page</div>
+                    </div>
+                </div>
+
+                <div class="item" data-url="https://example.com" data-title="Example.com">
+                    <div class="thumb" style="background:linear-gradient(135deg,#C4B5FD,#6EE7B7)">EX</div>
+                    <div class="meta">
+                        <div class="title">Example.com</div>
+                        <div class="desc">External site (may block embedding)</div>
+                    </div>
+                </div>
+
+                <div class="item" data-url="https://developer.mozilla.org" data-title="MDN Web Docs">
+                    <div class="thumb" style="background:linear-gradient(135deg,#60A5FA,#34D399)">MD</div>
+                    <div class="meta">
+                        <div class="title">MDN Web Docs</div>
+                        <div class="desc">Useful documentation (may block framing)</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="controls" aria-hidden="false">
+                <button class="btn" id="openExternal">Open selected in new tab</button>
+                <button class="btn secondary" id="editItems">Edit list</button>
+            </div>
+        </aside>
+
+        <main class="viewer" aria-live="polite">
+            <div class="topbar">
+                <div class="title" id="viewerTitle">About (local) <small id="viewerUrl">about.html</small></div>
+
+                <div class="controls-right">
+                    <button class="btn" id="reloadBtn" title="Reload">⟳</button>
+                    <button class="btn" id="backBtn" title="Back">←</button>
+                    <button class="btn" id="forwardBtn" title="Forward">→</button>
+                    <button class="btn" id="fullscreenBtn" title="Fullscreen">⤢</button>
+                </div>
+            </div>
+
+            <div class="iframe-wrap" id="iframeWrap">
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                    <div id="loaderText">Loading…</div>
+                </div>
+
+                <iframe id="viewer" src="about.html" title="Embedded viewer"></iframe>
+
+                <!-- blocked/fallback message (hidden by default) -->
+                <div id="blockedMsg" class="blocked" style="display:none;position:absolute;inset:0;background:transparent;z-index:8;">
+                    <div style="max-width:420px">
+                        <strong style="display:block;margin-bottom:6px">Unable to embed this page</strong>
+                        <div style="color:var(--muted);font-size:13px">Some sites disallow being displayed in iframes. You can open the page in a new tab instead.</div>
+                        <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+                            <button class="btn" id="openBtn">Open in new tab</button>
+                            <button class="btn secondary" id="tryReload">Try again</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Minimal, easy-to-extend embed viewer logic.
+        const list = document.getElementById('list');
+        const items = Array.from(document.querySelectorAll('.item'));
+        const iframe = document.getElementById('viewer');
+        const loader = document.getElementById('loader');
+        const loaderText = document.getElementById('loaderText');
+        const blockedMsg = document.getElementById('blockedMsg');
+        const viewerTitle = document.getElementById('viewerTitle');
+        const viewerUrl = document.getElementById('viewerUrl');
+
+        let loadTimeout = null;
+        let lastUrl = iframe.src;
+
+        function setActive(item){
+            items.forEach(i=>i.classList.remove('active'));
+            item.classList.add('active');
+        }
+
+        function startLoading(url, title){
+            loader.classList.remove('hidden');
+            blockedMsg.style.display = 'none';
+            loaderText.textContent = 'Loading…';
+            // Start timeout to detect embed block / long load
+            if(loadTimeout) clearTimeout(loadTimeout);
+            loadTimeout = setTimeout(()=> {
+                // After 4 seconds, if iframe not loaded, assume blocked or slow.
+                loaderText.textContent = 'Could not embed this page.';
+                blockedMsg.style.display = 'flex';
+            }, 4000);
+        }
+
+        function finishLoading(){
+            loader.classList.add('hidden');
+            if(loadTimeout){ clearTimeout(loadTimeout); loadTimeout = null; }
+            blockedMsg.style.display = 'none';
+        }
+
+        // Click handling for items
+        list.addEventListener('click', (ev)=>{
+            const item = ev.target.closest('.item');
+            if(!item) return;
+            const url = item.dataset.url;
+            const title = item.dataset.title || url;
+            setActive(item);
+            viewerTitle.childNodes[0].nodeValue = title + " ";
+            viewerUrl.textContent = url;
+            lastUrl = url;
+            startLoading(url, title);
+            iframe.src = url;
+        });
+
+        // iframe events
+        iframe.addEventListener('load', ()=>{
+            // Clear loader and blocked state
+            finishLoading();
+
+            // Try to read iframe title for nicer heading (may be cross-origin)
+            try{
+                const t = iframe.contentDocument && iframe.contentDocument.title;
+                if(t) viewerTitle.childNodes[0].nodeValue = t + " ";
+            }catch(e){
+                // ignore cross-origin access
+            }
+        });
+
+        // Controls
+        document.getElementById('openExternal').addEventListener('click', ()=>{
+            const active = document.querySelector('.item.active');
+            const url = active?.dataset.url || iframe.src;
+            window.open(url, '_blank', 'noopener,noreferrer');
+        });
+
+        document.getElementById('openBtn').addEventListener('click', ()=>{
+            window.open(lastUrl, '_blank', 'noopener,noreferrer');
+        });
+
+        document.getElementById('tryReload').addEventListener('click', ()=>{
+            blockedMsg.style.display = 'none';
+            loaderText.textContent = 'Retrying…';
+            startLoading(lastUrl);
+            // force reload
+            iframe.src = lastUrl;
+        });
+
+        document.getElementById('reloadBtn').addEventListener('click', ()=>{
+            startLoading(lastUrl);
+            try{
+                iframe.contentWindow.location.reload();
+            }catch(e){
+                // cross-origin: reset src to force reload
+                iframe.src = lastUrl;
+            }
+        });
+
+        document.getElementById('backBtn').addEventListener('click', ()=>{
+            try{ iframe.contentWindow.history.back(); }catch(e){ /* cross-origin */ }
+        });
+        document.getElementById('forwardBtn').addEventListener('click', ()=>{
+            try{ iframe.contentWindow.history.forward(); }catch(e){ /* cross-origin */ }
+        });
+
+        document.getElementById('fullscreenBtn').addEventListener('click', ()=>{
+            const el = document.querySelector('.iframe-wrap');
+            if(!document.fullscreenElement){
+                el.requestFullscreen?.();
+            }else{
+                document.exitFullscreen?.();
+            }
+        });
+
+        // Quick "edit list" to show how to change items (local demo)
+        document.getElementById('editItems').addEventListener('click', ()=>{
+            alert('You can edit the markup in this file to change the entries under the sidebar list.\n\nEach .item uses data-url and data-title attributes.');
+        });
+
+        // Initial loader hide if already loaded
+        window.addEventListener('load', ()=>{
+            // If iframe has loaded quickly, hide loader
+            setTimeout(()=> {
+                if(!loader.classList.contains('hidden')) finishLoading();
+            }, 600);
+        });
+    </script>
+</body>
+</html></div>
