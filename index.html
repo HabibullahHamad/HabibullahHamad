@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habibullah Hamad | Full Stack Developer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+  <!-- Navbar -->
+  
+  <header class="navbar">
+    <br>
+    <style>
+      .navbar { display:flex; align-items:center; gap:12px; padding:8px 16px; }
+      .navbar .container { margin-left:auto; }
+      .navbar .logo-img { width:40px !important; height:40px !important; border-radius:50% !important; object-fit:cover !important; }
+      .navbar .logo { margin:0; font-size:1.25rem; display:inline-block; vertical-align:middle; }
+      .brand-link { display:flex; align-items:center; text-decoration:none; color:inherit; }
+    </style>
+    <a href="#home" class="brand-link" aria-label="Home">
+      <img src="12.png" alt="Habibullah Hamad logo" class="logo-img" width="64" height="64" style="border-radius:50%; object-fit:cover;">
+    </a>
+      <h1 class="logo">Habibullah Hamad</h1>
+    <div class="container">
+   
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Home</a></li>
+           <li><a href="abut.html">About</a></li>
+           <li><a href="pashto.html">Projects</a></li>
+                     
+           <li><a href="projects.html">EXTRA</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h2>Hello, It's Me</h2>
+        <h1>Habibullah Hamad</h1>
+        <h3>Full Stack Developer</h3>
+        <p>Computer science graduate specializing in developing efficient software for public finance and e-governance systems.</p>
+        <div class="social-icons">
+        <script>
+          document.querySelectorAll('a[href]').forEach(a => {
+            const href = a.getAttribute('href')?.trim() || '';
+            if (href && !href.startsWith('#')) {
+              a.setAttribute('target', '_blank');
+              a.setAttribute('rel', 'noopener noreferrer');
+            }
+          });
+        </script>
+          <a href="https://www.facebook.com/habibullah.hamad.2025"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/hamad7861395"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/in/habibullah-hamad-b95747221/"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+        <a href="" class="btn">Download CV</a>
+      </div>
+      <style>
+        .footer{
+          background-color: azure;
+          position: relative;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+          height: 50px;
+          
+        }
+        .hero-image {
+          
+          border-radius: 100px;
+          animation: fadeIn 2s ease-in-out;
+          
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      </style>
+      <style>
+      .hero-image {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        animation: fadeIn 2s ease-in-out;
+      }
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .hero-image { width: 150px; height: 150px; }
+      }
+      </style>
+      <div class="hero-image",border-radius="100px">
+        <img src="12.png" alt="Habibullah Hamad">
+      </div>
+    </div>
+  </section>
+  <section id="subpages" class="subpages">
+</body>
+<div class="footer"> all rights </div>
+</html>
