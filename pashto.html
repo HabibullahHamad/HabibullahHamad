@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Projects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/lucide-icons@latest/dist/umd/lucide.min.js" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-blue-100 font-sans antialiased">
+  <!-- Navbar -->
+  <header class="bg-blue-600 shadow-sm sticky top-0 z-10">
+    <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="brand-link" aria-label="Home">
+      <img src="12.png" alt="Habibullah Hamad logo" class="logo-img" width="50" height="50" style="border-radius:50%; object-fit:cover;">
+    </a> 
+      <h1 class="text-2xl font-semibold text-whit-800">My Projects</h1>
+      <nav class="flex-1 flex items-center justify-center md:justify-end">
+        <!-- Desktop nav -->
+        <ul class="hidden md:flex items-center space-x-6">
+          <li><a href="index.html" class="text-whit-600 hover:text-whit-900">Home</a></li>
+          <li><a href="index.html#projects" class="text-whit-600 hover:text-whit-900">Projects</a></li>
+          <li><a href="index.html#about" class="text-whit-600 hover:text-whit-900">About</a></li>
+          <li><a href="index.html#contact" class="text-whit-600 hover:text-whit-900">Contact</a></li>
+        </ul>
+
+        <!-- Mobile toggle -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-btn" aria-label="Toggle menu" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile menu (hidden by default) -->
+      <div id="mobile-menu" class="hidden md:hidden absolute left-0 right-0 mt-16 bg-blue-600 shadow-md rounded-b-lg z-20">
+        <ul class="flex flex-col py-2">
+          <li><a href="index.html" class="block px-6 py-2 text-gray-700 hover:bg-gray-100">Home</a></li>
+          <li><a href="index.html#projects" class="block px-6 py-2 text-gray-700 hover:bg-gray-100">Projects</a></li>
+          <li><a href="index.html#about" class="block px-6 py-2 text-gray-700 hover:bg-gray-100">About</a></li>
+          <li><a href="index.html#contact" class="block px-6 py-2 text-gray-700 hover:bg-gray-100">Contact</a></li>
+        </ul>
+      </div>
+
+      <script>
+        (function () {
+          const btn = document.getElementById('menu-btn');
+          const menu = document.getElementById('mobile-menu');
+          if (!btn || !menu) return;
+          btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+          });
+          // close mobile menu on outside click
+          document.addEventListener('click', (e) => {
+            if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+              menu.classList.add('hidden');
+            }
+          });
+        })();
+      </script></ul></div></ul>
+        
+    </div>
+  </header>
+  <style>
+    /* Make the main content narrower and add padding */
+    main {
+      max-width: 700rem !important; /* ~768px */
+      padding: 3rem !important;
+      background-color: rgba(205, 207, 210, 0.971);
+    }
+
+    /* Enlarge organization logos inside the project cards */
+    .bg-gray-50 img {
+      height: 6rem !important; /* larger than h-16 */
+      width: auto !important;
+    }
+  </style></style>
+  <style>
+    /* Narrow the main content area */
+    main {
+      max-width: 1200px !important;
+      margin: 0 auto !important;
+      padding: 2rem !important;
+    }
+
+    /* Ensure responsiveness on small screens */
+    @media (max-width: 640px) {
+      main {
+        max-width: 100% !important;
+        padding: 1rem !important;
+      }
+    }
+  </style>
+  <main class="max-w-5xl mx-auto px-6 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- ----------------------------CARDS------------------------------------------- -->
+<!-- Project Card Start -->
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300">
+  <!-- Logo -->
+  <div class="bg-gray-50 p-4 flex justify-center">
+    <img src="mof.png" alt="Kima Shifa Logo" class="h-20 rounded-lg shadow-sm">
+     <hr class="my-8 border-gray-300" />
+  </div>
+ 
+  <!-- Content -->
+  <div class="p-6">
+    <h2 class="text-2xl font-semibold text-blue-800 mb-2">SBPS</h2>
+    <p class="text-gray-600 text-sm mb-4 leading-relaxed">The State Budget Planning System (SBPS) is a modern, web-based platform developed to 
+restructure Afghanistan’s budget formulation, execution, monitoring, and reporting 
+processes. </p>
+<h4 class="text-2x2 font-semibold text-blue-800 mb-2">Technologies Used</h4>  
+  <div class="text-sm mb-5 space-y-1">
+      <p><span class="font-semibold text-gray-700">Front End:</span> <span class="text-blue-600 font-medium">HTML, CSS, JavaScript (Bootstrap)</span></p>
+      <p><span class="font-semibold text-gray-700">Back End:</span> <span class="text-blue-600 font-medium">Dot NET</span></p>
+      <p><span class="font-semibold text-gray-700">Database:</span> <span class="text-blue-600 font-medium">MySQL</span></p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center space-x-2">
+      <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Detail</button>
+      <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Open</button>
+      <button class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Link</button>
+    </div>
+  </div>
+</div>
+<!-- Project Card End -->
+ <!-- Project Card Start -->
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300">
+  <!-- Logo -->
+  <div class="bg-gray-50 p-4 flex justify-center">
+    <img src="mrmc.png" alt="Kima Shifa Logo" class="h-20 rounded-lg shadow-sm">
+     <hr class="my-8 border-gray-300" />
+  </div>
+ 
+  <!-- Content -->
+  <div class="p-6">
+    <h2 class="text-2xl font-semibold text-blue-800 mb-2">MRMC-MIS</h2>
+    <p class="text-gray-600 text-sm mb-4 leading-relaxed">This organization is engaged in providing social, administrative, technical and accounting services to the residents of Macrorayan and other related projects. 
+processes. </p>
+<h4 class="text-2x2 font-semibold text-blue-800 mb-2">Technologies Used</h4>  
+  <div class="text-sm mb-5 space-y-1">
+      <p><span class="font-semibold text-gray-700">Front End:</span> <span class="text-blue-600 font-medium">HTML, CSS, JavaScript (Bootstrap)</span></p>
+      <p><span class="font-semibold text-gray-700">Back End:</span> <span class="text-blue-600 font-medium">java,Spring Boot</span></p>
+      <p><span class="font-semibold text-gray-700">Database:</span> <span class="text-blue-600 font-medium">Postgre SQL</span></p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center space-x-2">
+      <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Detail</button>
+      <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Open</button>
+      <button class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Link</button>
+    </div>
+  </div>
+</div>
+<!-- Project Card End -->
+ <!-- Project Card Start -->
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300">
+  <!-- Logo -->
+  <div class="bg-gray-50 p-4 flex justify-center">
+    <img src="ech.png" alt="Kima Shifa Logo" class="h-20 rounded-lg shadow-sm">
+     <hr class="my-8 border-gray-300" />
+  </div>
+ 
+  <!-- Content -->
+  <div class="p-6">
+    <h2 class="text-2xl font-semibold text-blue-800 mb-2">ECH-HMIS</h2>
+    <p class="text-gray-600 text-sm mb-4 leading-relaxed">Ekhlas Curative Hospital Management Information System — designed to digitalize community health center operations, streamline patient data management, and support medical reporting across multiple facilities.
+<h4 class="text-2x2 font-semibold text-blue-800 mb-2">Technologies Used</h4>  
+  <div class="text-sm mb-5 space-y-1">
+      <p><span class="font-semibold text-gray-700">Front End:</span> <span class="text-blue-600 font-medium">HTML, CSS, JavaScript (Bootstrap)</span></p>
+      <p><span class="font-semibold text-gray-700">Back End:</span> <span class="text-blue-600 font-medium">C# , Dot NET</span></p>
+      <p><span class="font-semibold text-gray-700">Database:</span> <span class="text-blue-600 font-medium">SQL Server</span></p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center space-x-2">
+      <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Detail</button>
+      <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Open</button>
+      <button class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Link</button>
+    </div>
+  </div>
+</div>
+<!-- Project Card End -->
+ <!-- Project Card Start -->
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300">
+  <!-- Logo -->
+  <div class="bg-gray-50 p-4 flex justify-center">
+    <img src="KIMS.jpeg" alt="Kima Shifa Logo" class="h-20 rounded-lg shadow-sm">
+     <hr class="my-8 border-gray-300" />
+  </div>
+ 
+  <!-- Content -->
+  <div class="p-6">
+    <h2 class="text-2xl font-semibold text-blue-800 mb-2">KIMS SHIFA HMIS</h2>
+    <p class="text-gray-600 text-sm mb-4 leading-relaxed">Kims Shifa Hospital Management Information System — designed to digitalize community health center operations, streamline patient data management, and support medical reporting across multiple facilities. 
+processes. </p>
+<h4 class="text-2x2 font-semibold text-blue-800 mb-2">Technologies Used</h4>  
+  <div class="text-sm mb-5 space-y-1">
+      <p><span class="font-semibold text-gray-700">Front End:</span> <span class="text-blue-600 font-medium">HTML, CSS, JavaScript (Bootstrap)</span></p>
+      <p><span class="font-semibold text-gray-700">Back End:</span> <span class="text-blue-600 font-medium">VB.NET</span></p>
+      <p><span class="font-semibold text-gray-700">Database:</span> <span class="text-blue-600 font-medium">SQL SERVER R2</span></p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center space-x-2">
+      <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Detail</button>
+      <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Open</button>
+      <button class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Link</button>
+    </div>
+  </div>
+</div>
+<!-- Project Card End -->
+ <!-- Project Card Start -->
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300">
+  <!-- Logo -->
+  <div class="bg-gray-50 p-4 flex justify-center">
+    <img src="pos.png" alt="Kima Shifa Logo" class="h-20 rounded-lg shadow-sm">
+     <hr class="my-8 border-gray-300" />
+  </div>
+ 
+  <!-- Content -->
+  <div class="p-6">
+    <h2 class="text-2xl font-semibold text-blue-800 mb-2">E-POS</h2>
+    <p class="text-gray-600 text-sm mb-4 leading-relaxed">An E-POS, or electronic point-of-sale system, accepts customer payments and tracks sales and inventory. Learn how EPOS systems can work for your retail business.
+processes. </p>
+<h4 class="text-2x2 font-semibold text-blue-800 mb-2">Technologies Used</h4>  
+  <div class="text-sm mb-5 space-y-1">
+      <p><span class="font-semibold text-gray-700">Front End:</span> <span class="text-blue-600 font-medium">HTML, CSS, JavaScript (Laravel11)</span></p>
+      <p><span class="font-semibold text-gray-700">Back End:</span> <span class="text-blue-600 font-medium">PHP</span></p>
+      <p><span class="font-semibold text-gray-700">Database:</span> <span class="text-blue-600 font-medium">MySQL</span></p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center space-x-2">
+      <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Detail</button>
+      <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Open</button>
+      <button class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Link</button>
+    </div>
+  </div>
+</div>
+<!-- Project Card End -->
+ <!-- Project Card Start -->
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-transform transform hover:-translate-y-1 duration-300">
+  <!-- Logo -->
+  <div class="bg-gray-50 p-4 flex justify-center">
+    <img src="6.jpeg" alt="Kima Shifa Logo" class="h-20 rounded-lg shadow-sm">
+     <hr class="my-8 border-gray-300" />
+  </div>
+ 
+  <!-- Content -->
+  <div class="p-6">
+    <h2 class="text-2xl font-semibold text-blue-800 mb-2">HRMIS</h2>
+    <p class="text-gray-600 text-sm mb-4 leading-relaxed">HRMIS, or Human Resource Management Information System, is a system used for managing human resources. It can encompass a range of functions, from administrative tasks like payroll to more strategic functions such as talent management and workforce planning. One system is HRMIS 2.0. Some HRMIS systems also offer support services like a help desk. 
+processes. </p>
+<h4 class="text-2x2 font-semibold text-blue-800 mb-2">Technologies Used</h4>  
+  <div class="text-sm mb-5 space-y-1">
+      <p><span class="font-semibold text-gray-700">Front End:</span> <span class="text-blue-600 font-medium">HTML, CSS, JavaScript (Bootstrap)</span></p>
+      <p><span class="font-semibold text-gray-700">Back End:</span> <span class="text-blue-600 font-medium">Dot NET</span></p>
+      <p><span class="font-semibold text-gray-700">Database:</span> <span class="text-blue-600 font-medium">MySQL</span></p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-between items-center space-x-2">
+      <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Detail</button>
+      <button class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Open</button>
+      <button class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 rounded-lg shadow-sm transition-all duration-200">Link</button>
+    </div>
+  </div>
+</div>
+<!-- Project Card End -->
+ 
+
+<!-- --------------------------END CARDS------------------------------- -->
+    </div>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm py-6">
+    © 2025 Habibullah Hamad — All Rights Reserved
+  </footer>
+
+</body>
+</html>

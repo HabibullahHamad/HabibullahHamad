@@ -3,318 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Habibullah Hamad | Portfolio</title>
+  <title>Habibullah Hamad | Full Stack Developer</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">    
-    
-    <!-- Font Awesome for broad icon support -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1Cm3Y1XKq6qYv4Z1kq0m9GQy7b7rZ0y6qv4V1s5K0s1z9Qf3K2z1Yx1JmQe3yKk1Qm3Z1Yx2Vf1w3z1Yx2Vf==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Small utilities to position icons inside form controls (apply .form-icon-wrapper to a container) -->
-    <style>
-        .form-icon-wrapper { position: relative; display: inline-block; width: 100%; }
-        .form-icon-wrapper .fa, .form-icon-wrapper .bi { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: rgba(0,0,0,0.45); }
-        .form-icon-wrapper input,
-        .form-icon-wrapper textarea,
-        .form-icon-wrapper select { padding-left: 2.2rem; }
-    </style>
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Optional: Bootstrap Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-<!-- Bootstrap JS bundle (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" defer></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<style>
-
-
-    /* Enhanced card layout and visuals */
-    .project-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.25rem;
-    }
-    .project-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 12px;
-        padding: 1.25rem;
-        background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-        border: 1px solid rgba(255,255,255,0.04);
-        box-shadow: 0 8px 22px rgba(10,10,10,0.12);
-        transition: transform .28s ease, box-shadow .28s ease, border-color .18s ease;
-        cursor: pointer;
-    }
-    .project-card:focus,
-    .project-card:hover {
-        transform: translateY(-8px) scale(1.01);
-        box-shadow: 0 20px 50px rgba(10,10,10,0.18);
-        border-color: rgba(255,255,255,0.08);
-        outline: none;
-    }
-    .project-card h3 { margin: 0 0 .4rem; font-size: 1.05rem; font-weight:700; color: #fff; }
-    .project-card p { margin: 0 0 .75rem; color: #d0d6dd; line-height:1.35; }
-    .project-preview {
-        height: 86px;
-        border-radius: 8px;
-        margin-bottom: .8rem;
-        background-size: cover;
-        background-position: center;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
-    }
-    .tags { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem; }
-    .tag {
-        font-size:.72rem;
-        padding:.25rem .5rem;
-        border-radius:999px;
-        background: rgba(255,255,255,0.03);
-        border: 1px solid rgba(255,255,255,0.03);
-        color: #e9eef5;
-    }
-    .card-actions { position:absolute; top:10px; right:10px; display:flex; gap:.4rem; z-index:5; }
-    .action-btn {
-        background: rgba(0,0,0,0.25);
-        border: none;
-        color: #fff;
-        padding:.38rem .46rem;
-        border-radius:8px;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        gap:.35rem;
-        transition: transform .12s ease, background .12s ease;
-    }
-    .action-btn:hover { transform: translateY(-2px); background: rgba(0,0,0,0.35); }
-    .footer, .header, .hero, .about, .skills, .contact { z-index: 1; }
-
-    /* responsiveness */
-    @media (max-width:480px){
-        .project-preview { height:72px; }
-    }
-
-    /* respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-        .project-card, .action-btn { transition: none !important; transform: none !important; }
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Add dynamic previews, tags and actions to project cards
-        var gradients = [
-            'linear-gradient(135deg,#667eea 0%,#764ba2 100%)',
-            'linear-gradient(135deg,#f6d365 0%,#fda085 100%)',
-            'linear-gradient(135deg,#89f7fe 0%,#66a6ff 100%)',
-            'linear-gradient(135deg,#ff9a9e 0%,#fecfef 99%)'
-        ];
-
-        var cards = document.querySelectorAll('.project-card');
-        cards.forEach(function (card, idx) {
-            // Preview block
-            if (!card.querySelector('.project-preview')) {
-                var preview = document.createElement('div');
-                preview.className = 'project-preview';
-                preview.style.backgroundImage = gradients[idx % gradients.length];
-                card.insertBefore(preview, card.firstChild);
-            }
-
-            // Actions (view / open)
-            if (!card.querySelector('.card-actions')) {
-                var actions = document.createElement('div');
-                actions.className = 'card-actions';
-                actions.innerHTML = '<button class="action-btn" data-action="details" aria-label="View details"><i class="bi bi-eye"></i></button>' +
-                                                        '<button class="action-btn" data-action="link" aria-label="Open project"><i class="bi bi-link-45deg"></i></button>';
-                card.appendChild(actions);
-            }
-
-            // Tags
-            if (!card.querySelector('.tags')) {
-                var tags = document.createElement('div');
-                tags.className = 'tags';
-                tags.innerHTML = '<span class="tag">Laravel</span><span class="tag">PHP</span>';
-                card.appendChild(tags);
-            }
-
-            // make keyboard focusable
-            if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
-        });
-
-        // Create a reusable Bootstrap modal dynamically
-        var modalId = 'projectDetailsModal';
-        if (!document.getElementById(modalId)) {
-            var modalHtml = '' +
-                '<div class="modal fade" id="' + modalId + '" tabindex="-1" aria-hidden="true">' +
-                    '<div class="modal-dialog modal-dialog-centered modal-sm">' +
-                        '<div class="modal-content bg-dark text-light">' +
-                            '<div class="modal-header border-0">' +
-                                '<h5 class="modal-title">Project</h5>' +
-                                '<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>' +
-                            '</div>' +
-                            '<div class="modal-body"></div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>';
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-        }
-        var modalEl = document.getElementById(modalId);
-        var bsModal = new bootstrap.Modal(modalEl);
-
-        // Click handlers
-        document.body.addEventListener('click', function (e) {
-            var btn = e.target.closest('.action-btn');
-            if (!btn) return;
-            var card = btn.closest('.project-card');
-            if (!card) return;
-            var action = btn.dataset.action;
-            if (action === 'details') {
-                var title = card.querySelector('h3')?.textContent || 'Project';
-                var desc = card.querySelector('p')?.textContent || '';
-                modalEl.querySelector('.modal-title').textContent = title;
-                modalEl.querySelector('.modal-body').innerHTML = '<p>' + desc + '</p>' +
-                    '<p><strong>Technologies:</strong> Laravel, PHP, MySQL</p>';
-                bsModal.show();
-            } else if (action === 'link') {
-                var link = card.querySelector('a');
-                if (link && link.href && link.getAttribute('href') !== '#') {
-                    window.open(link.href, '_blank');
-                } else {
-                    // fallback to details
-                    card.querySelector('.action-btn[data-action="details"]').click();
-                }
-            }
-        });
-
-        // keyboard activation
-        document.querySelectorAll('.project-card').forEach(function (card) {
-            card.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    card.querySelector('.action-btn[data-action="details"]').click();
-                }
-            });
-        });
-    });
-</script>
 <body>
-<aside class="right-graphic" aria-hidden="true"></aside>
-  <header class="header">
-    <div class="container">
+  
+  <!-- Navbar -->
+  
+  <header class="navbar">
+    <br>
+    <style>
+      .navbar { display:flex; align-items:center; gap:12px; padding:8px 16px; }
+      .navbar .container { margin-left:auto; }
+      .navbar .logo-img { width:40px !important; height:40px !important; border-radius:50% !important; object-fit:cover !important; }
+      .navbar .logo { margin:0; font-size:1.25rem; display:inline-block; vertical-align:middle; }
+      .brand-link { display:flex; align-items:center; text-decoration:none; color:inherit; }
+    </style>
+    <a href="#home" class="brand-link" aria-label="Home">
+      <img src="12.png" alt="Habibullah Hamad logo" class="logo-img" width="64" height="64" style="border-radius:50%; object-fit:cover;">
+    </a>
       <h1 class="logo">Habibullah Hamad</h1>
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="projects.html">Projects</a>
-        <a href="#contact">Contact</a>
+    <div class="container">
+   
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Home</a></li>
+           <li><a href="abut.html">About</a></li>
+           <li><a href="pashto.html">Projects</a></li>
+                     
+           <li><a href="projects.html">EXTRA</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-<style>
-    .hero {
-        background-image: url('path/to/your/background-image.jpg');
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        color: white; /* Adjust text color for better visibility */
-    }
-</style>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
     <div class="hero-content">
-      <h2>Hello, I’m <span>Habibullah Hamad</span></h2>
-      <p>Software Developer | Web Designer | System Analyst</p>
-      <button class="btn">Placeholder Button</button>
-    <style>
-        @keyframes slideDown {
-            0% {
-                transform: translateY(-20px);
-                opacity: 0;
+      <div class="hero-text">
+        <h2>Hello, It's Me</h2>
+        <h1>Habibullah Hamad</h1>
+        <h3>Full Stack Developer</h3>
+        <p>Computer science graduate specializing in developing efficient software for public finance and e-governance systems.</p>
+        <div class="social-icons">
+        <script>
+          document.querySelectorAll('a[href]').forEach(a => {
+            const href = a.getAttribute('href')?.trim() || '';
+            if (href && !href.startsWith('#')) {
+              a.setAttribute('target', '_blank');
+              a.setAttribute('rel', 'noopener noreferrer');
             }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        .animated-image {
-            animation: slideDown 1s ease-in-out forwards;
-        }
-    </style>
-    <style>
-        @keyframes slideDown {
-            0% {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            50% {
-                transform: translateY(10px);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-        }
-        .animated-image {
-            animation: slideDown 4s ease-in-out infinite;
-        }
-    </style>
-
-    <img src="1.png" alt="Animated image of Habibullah Hamad" class="animated-image" style="position: absolute; right: 100px; top: 100px; width: 150px; height: auto; border-radius: 88px; box-shadow: 0 4px 12px rgba(212, 8, 8, 0.1);">
-    </div>
-  </section>
-
-
-  <section id="about" class="about">
-    <h2>About Me</h2>
-    <p>
-      I am Habibullah Hamad, a passionate developer specializing in building efficient and modern web-based systems. 
-      My focus is on Laravel, PHP, MySQL, and enterprise application development.
-    </p>
-  </section>
-
-  <section id="skills" class="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>Laravel / PHP / MySQL</li>
-      <li>Bootstrap / Tailwind / HTML / CSS / JS</li>
-      <li>System Design & Documentation</li>
-      <li>Budget & Financial Systems</li>
-    </ul>
-  </section>
-<style></style>
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <h3>Budget Management Information System</h3>
-        <p>Developed in Laravel 11 for government budgeting workflow and approval.</p>
+          });
+        </script>
+          <a href="https://www.facebook.com/habibullah.hamad.2025"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/hamad7861395"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/in/habibullah-hamad-b95747221/"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+        <a href="" class="btn">Download CV</a>
       </div>
-      <div class="project-card">
-        <h3>Procurement Management System</h3>
-        <p>Automated procurement cycle with document tracking and vendor management.</p>
-      </div>
-      <div class="project-card">
-        <h3>Core Banking System (CBS)</h3>
-        <p>Designed modules for financial institutions focusing on security and automation.</p>
+      <style>
+        .footer{
+          background-color: azure;
+          position: relative;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+          height: 50px;
+          
+        }
+        .hero-image {
+          
+          border-radius: 100px;
+          animation: fadeIn 2s ease-in-out;
+          
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      </style>
+      <style>
+      .hero-image {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        animation: fadeIn 2s ease-in-out;
+      }
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .hero-image { width: 150px; height: 150px; }
+      }
+      </style>
+      <div class="hero-image",border-radius="100px">
+        <img src="12.png" alt="Habibullah Hamad">
       </div>
     </div>
   </section>
-
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="#">habibullah@example.com</a></p>
-    <p>Phone: +93-700-000000</p>
-    <button class="btn">Placeholder Button</button>
-  </section>
-
-  <footer class="footer">
-    <p>© 2025 Habibullah Hamad. All rights reserved.</p>
-  </footer>
-
-  <script src="script.js"></script>
+  <section id="subpages" class="subpages">
 </body>
+<div class="footer"> all rights </div>
 </html>
